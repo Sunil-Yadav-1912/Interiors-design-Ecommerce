@@ -1,0 +1,7 @@
+.team-member-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally in a column flex container */
+    justify-content: center; /* Center vertically */
+    height: 100%; /* Optional: Set height to fill the parent container */
+}

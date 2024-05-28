@@ -1,0 +1,197 @@
+<!-- /*
+* Bootstrap 5
+* Template Name: Furni
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+		<!-- Bootstrap CSS -->
+		<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<!-- <link href="css/tiny-slider.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/tiny-slider.css')}}"/>
+		<!-- <link href="css/style.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
+
+		<title>Create Your Own Blog</title>
+	</head>
+
+	<body>
+
+
+	<!-- Start Header/Navigation -->
+
+	{% include 'header.html' %}
+
+	<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Write Your Own Blog</h1>
+								<!-- <p class="mb-4">Discover our latest blog posts where we share valuable insights, tips, and updates on various topics. Stay informed and inspired with our engaging content.</p> -->
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="hero-img-wrap">
+								<img src="{{url_for('static', filename='images/couch.png')}}" class="img-fluid" alt="Modern Interior Design">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Hero Section -->
+        <!-- Blog Writing Section Start -->
+		<div class="untree_co-section">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col-md-6 mb-5 mb-md-0">
+		          <h2 class="h3 mb-3 text-black">Blog Details</h2>
+		          <div class="p-3 p-lg-5 border bg-white">
+		            <div class="form-group row mb-3">
+		              <label for="b_country" class="text-black">Country <span class="text-danger">*</span></label>
+		              <select id="b_country" class="form-control">
+		                <option value="1">Select a country</option>
+                        <option value="2">India</option>    
+		                <option value="3">Algeria</option>    
+		                <option value="4">Afghanistan</option>    
+		                <option value="5">Ghana</option>    
+		                <option value="6">Albania</option>    
+		                <option value="7">Bahrain</option>    
+		                <option value="8">Colombia</option>    
+		                <option value="9">Dominican Republic</option>   
+		                <option value="10">bangladesh</option>    
+		              </select>
+		            </div>
+		            <div class="form-group  row mb-3">
+		              <div class="col-md-6">
+		                <label for="b_fname" class="text-black">Author's Name<span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="b_fname" name="b_fname">
+		              </div>
+		              <div class="col-md-6">
+		                <label for="b_email" class="text-black">Author's Email <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="b_email" name="b_email">
+		              </div>
+		            </div>
+		            <div class="form-group row mb-3">
+		              <div class="col-md-6">
+		                <label for="b_email_address" class="text-black">Blog's Title <span class="text-danger">*</span></label>
+		                <input type="text" class="form-control" id="b_email_address" name="b_email_address">
+		              </div>
+		            </div>
+                    <div class="form-group">
+                        <label for="b_content" class="text-black">Blog Content</label>
+                        <textarea name="b_content" id="b_content" cols="30" rows="5" class="form-control" placeholder="Write your blog here..."></textarea>
+                    </div>
+		        </div>
+            </div>
+              <div class="col-md-6">
+                <div class="row mb-5">
+                  <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">Blog Image</h2>
+                    <div class="p-3 p-lg-5 border bg-white">
+                        <label for="b_image" class="text-black mb-3">Upload the Blog Image for higher chances of customers reading it</label>
+                        <input type="file" class="form-control" id="b_image" name="b_image">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-black btn-lg py-3 btn-block" id="btn-block">Submit Blog</button>
+                  </div>
+		      </div>
+          
+		      <!-- </form> -->
+		    </div>
+		  </div>
+        </div>
+        <!-- Blog Writing Section End -->
+
+		<!-- Start footer Section -->
+
+		{% include 'footer.html' %}
+
+		<!-- End footer Section -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+        <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+        <!-- <script src="js/tiny-slider.js"></script> -->
+        <script src="{{url_for('static', filename='js/tiny-slider.js')}}"></script>
+
+        <!-- <script src="js/custom.js"></script> -->
+        <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('#btn-block').click(function(e){
+                    e.preventDefault(); // Prevent default form submission
+                    
+                    // Get form data
+                    var country = $('#b_country').val();
+                    var authorName = $('#b_fname').val();
+                    var authorEmail = $('#b_email').val();
+                    var blogTitle = $('#b_email_address').val();
+                    var blogContent = $('#b_content').val();
+                    var blogImageFile = $('#b_image')[0].files[0]; // Get the selected file
+                    
+                    // Validate form fields (you can add more validation logic here)
+                    if(country == '' || authorName == '' || authorEmail == '' || blogTitle == '' || blogContent == '') {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    // Prepare form data with file
+                    var formData = new FormData();
+                    formData.append('country', country);
+                    formData.append('author_name', authorName);
+                    formData.append('author_email', authorEmail);
+                    formData.append('blog_title', blogTitle);
+                    formData.append('blog_content', blogContent);
+                    formData.append('blog_image', blogImageFile);
+                    
+                    // Send POST request to API endpoint
+                    $.ajax({
+                        url: '/submit_blog',
+                        method: 'POST',
+                        data: formData,
+                        contentType: false, // Don't set content type
+                        processData: false, // Don't process data
+                        success: function(response){
+                            alert(response.message);
+                            // Clear form fields after successful submission
+                            $('#b_country').val('');
+                            $('#b_fname').val('');
+                            $('#b_email').val('');
+                            $('#b_email_address').val('');
+                            $('#b_content').val('');
+                            $('#b_image').val('');
+                        },
+                        error: function(xhr, status, error){
+                            console.error('Error:', error);
+                            alert('Failed to create blog. Please try again later.');
+                        }
+                    });
+                });
+            });
+        </script>
+        
+
+	</body>
+
+</html>

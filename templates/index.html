@@ -1,0 +1,177 @@
+<!-- /*
+* Bootstrap 5
+* Template Name: Furni
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+		<!-- Bootstrap CSS -->
+		<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<!-- <link href="css/tiny-slider.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/tiny-slider.css')}}"/>
+		<!-- <link href="css/style.css" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
+
+		<title>Interiors</title>
+	</head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+
+		{% include 'header.html' %}
+
+		<!-- End Header/Navigation -->
+
+		<!-- Start Hero Section -->
+		<div class="hero">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-5">
+						<div class="intro-excerpt">
+							<h1>Modern Interior <span class="d-block">Design Studio</span></h1>
+							<p class="mb-4">Experience the best in modern interior design with our expertly crafted solutions. Transform your space with elegance and style.</p>
+							<p><a href="shop.html" class="btn btn-secondary me-2">Shop Now</a><a href="explore.html" class="btn btn-white-outline">Explore</a></p>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="hero-img-wrap">
+							<img src="{{url_for('static', filename='images/couch.png')}}" class="img-fluid" alt="Modern Interior Design">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Hero Section -->
+
+
+		<!-- Start Product Section -->
+
+		{% include 'products_3.html' %}
+
+		<!-- End Product Section -->
+
+
+		<!-- Start Why Choose Us Section -->
+
+		{% include 'whyChooseUs.html' %}
+
+		<!-- End Why Choose Us Section -->
+
+
+		<!-- Start We Help Section -->
+
+		{% include 'weHelpSection.html' %}
+
+		<!-- End We Help Section -->
+
+
+		<!-- Start Popular Product -->
+
+		{% include 'popularProducts.html' %}
+
+		<!-- End Popular Product -->
+
+
+		<!-- Start Testimonial Slider -->
+
+		{% include 'testimonals.html' %}
+
+		<!-- End Testimonial Slider -->
+
+
+		<!-- Start Team Section -->
+
+		{% include 'team.html' %}
+
+		<!-- End Team Section -->
+
+
+		<!-- Start Blog Section -->
+		<div class="blog-section">
+			<div class="container">
+				<div class="row mb-5">
+					<div class="col-md-6">
+						<h2 class="section-title">Recent Blog</h2>
+					</div>
+					<div class="col-md-6 text-start text-md-end">
+						<a href="#" class="more">View All Posts</a>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="{{ url_for('static', filename='images/post-1.jpg') }}" alt="First Time Home Owner Ideas" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">First Time Home Owner Ideas</a></h3>
+								<div class="meta">
+									<span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec 19, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="{{ url_for('static', filename='images/post-2.jpg') }}" alt="How To Keep Your Furniture Clean" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">How To Keep Your Furniture Clean</a></h3>
+								<div class="meta">
+									<span>by <a href="#">Robert Fox</a></span> <span>on <a href="#">Dec 15, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+						<div class="post-entry">
+							<a href="#" class="post-thumbnail"><img src="{{ url_for('static', filename='images/post-3.jpg') }}" alt="Small Space Furniture Apartment Ideas" class="img-fluid"></a>
+							<div class="post-content-entry">
+								<h3><a href="#">Small Space Furniture Apartment Ideas</a></h3>
+								<div class="meta">
+									<span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec 12, 2021</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Blog Section -->
+
+
+		<!-- Start footer Section -->
+
+		{% include 'footer.html' %}
+
+		<!-- End footer Section -->
+
+
+		<!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+		<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+		<!-- <script src="js/tiny-slider.js"></script> -->
+		<script src="{{url_for('static', filename='js/tiny-slider.js')}}"></script>
+
+		<!-- <script src="js/custom.js"></script> -->
+		<script src="{{url_for('static', filename='js/custom.js')}}"></script>
+
+	</body>
+
+</html>

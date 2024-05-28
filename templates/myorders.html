@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/cart.css')}}"/>
+    <!-- Add your custom CSS styles here -->
+</head>
+<style>
+    /* Loader styles */
+    .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure the loader is above other content */
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+<body>
+    <div class="loader-container" id="loaderContainer" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12 cart">
+                
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>My Orders</b></h4></div>
+                        <div class="col align-self-center text-right text-muted">{{ resp|length }} Orders</div>
+                    </div>
+                </div>    
+             
+                {% for item_key, item in resp.items() %}
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2">
+                            <span id="image-{{ item_key }}" style="display: none;">{{ item.image }}</span>
+                            <img class="img-fluid" src="{{ url_for('static', filename='images/' + item.image) }}">
+                        </div>
+                        <div class="col">
+                            <div class="row"><h5>Name: <span id="name-{{ item_key }}">{{ item.name }}</span></h5></div>
+                            <div class="row"><p>Total Price: <span id="price-{{ item_key }}">{{ item.price }}</span></p></div>
+                            <div class="row"><p>Quantity: <span id="quantity-{{ item_key }}">{{ item.quantity }}</span></p></div>
+                            <div class="row"><p>Shipping: <span id="shipping-{{ item_key }}">{{ item.shipping }}</span></p></div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-danger cancel-btn" data-item-id="{{ item_key }}">Cancel</button>
+                            <button class="btn btn-primary inquire-btn" data-item-id="{{ item_key }}">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            
+                <div class="back-to-shop"><a href="{{ url_for('index') }}">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Event listener for cancel button click
+            $('.cancel-btn').click(function() {
+                var orderId = $(this).data('item-id');
+                 // Show loader
+                 $('#loaderContainer').show();
+                // Make AJAX request to cancel-order endpoint
+                $.ajax({
+                    url: 'order-cancel',
+                    type: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({ orderId: orderId }),
+                    success: function(response) {
+                         // Hide loader
+                         $('#loaderContainer').hide();
+                        // Handle success response
+                        console.log('Order cancelled successfully.');
+                        location.reload();
+
+                        // Optionally, update the UI to reflect the cancelled order
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        // Hide loader
+                        $('#loaderContainer').hide();
+                        console.error('Error cancelling order:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

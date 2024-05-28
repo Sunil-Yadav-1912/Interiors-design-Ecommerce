@@ -1,0 +1,31 @@
+from dotenv import dotenv_values
+# from pathlib import Path
+# from dotenv import load_dotenv
+
+env = dotenv_values(".env")
+
+TYPE = env['TYPE']
+PROJECT_ID = env['PROJECT_ID']
+PRIVATE_KEY_ID = env['PRIVATE_KEY_ID']
+PRIVATE_KEY = env['PRIVATE_KEY']
+CLIENT_EMAIL = env['CLIENT_EMAIL']
+CLIENT_ID = env['CLIENT_ID']
+AUTH_URI = env['AUTH_URI']
+TOKEN_URI = env['TOKEN_URI']
+AUTH_PROVIDER_X509_CERT_URL = env['AUTH_PROVIDER_X509_CERT_URL']
+CLIENT_X509_CERT_URL = env['CLIENT_X509_CERT_URL']
+UNIVERSE_DOMAIN = env['UNIVERSE_DOMAIN']
+DATABASE_URL = env['DATABASE_URL']
+STORAGE_URL = env['STORAGE_URL']
+
+DBNAME = env['DBNAME']
+# Mail Credentials
+
+SMTP_SERVER = env['SMTP_SERVER']
+SMTP_PORT = env['SMTP_PORT']
+SMTP_USERNAME = env['SMTP_USERNAME']
+SMTP_PASSWORD = env['SMTP_PASSWORD']
+SENDER_EMAIL = env['SENDER_EMAIL']
+RECIPIENT_EMAIL = env['RECIPIENT_EMAIL']
+
+

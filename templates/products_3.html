@@ -1,0 +1,32 @@
+<!-- Start Product Section -->
+<div class="product-section">
+    <div class="container">
+        <div class="row">
+
+            <!-- Start Column 1 -->
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Crafted with Excellent Materials</h2>
+                <p class="mb-4">Our products are crafted with the highest quality materials to ensure durability and style. Discover the perfect pieces to complete your interior design vision.</p>
+                <p><a href="shop.html" class="btn">Explore</a></p>
+            </div>
+            <!-- End Column 1 -->
+
+            <!-- Loop through the first 3 products dynamically -->
+            {% for item_key, item in resp.interior_designs.items() %}
+            {% if loop.index <= 3 %}
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{{ url_for('static', filename='images/' + item.image) }}" class="img-fluid product-thumbnail" alt="{{ item.name }}">
+                    <h3 class="product-title">{{ item.name }}</h3>
+                    <strong class="product-price">{{ item.price }}</strong>
+                    <span class="icon-cross">
+                        <img src="{{ url_for('static', filename='images/cross.svg') }}" class="img-fluid" alt="Cross Icon">
+                    </span>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- End Product Section -->

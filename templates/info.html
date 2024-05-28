@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/cart.css') }}"/>
+    <style>
+        /* Adjust image size */
+        .product-image {
+            width: 100%; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 200px; /* Limit maximum height if necessary */
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container" id="loaderContainer" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4><b>More Info</b></h4>
+            </div>
+            <div class="card-body">
+                {% for item_key, item in resp.items() %}
+                <div class="row border-top border-bottom mb-3">
+                    <div class="col-md-2">
+                        <!-- Adjust class name and add 'product-image' class -->
+                        <img class="img-fluid product-image" src="{{ url_for('static', filename='images/' + (item.image if item.image else 'default.jpg')) }}">
+                    </div>
+                    <div class="col-md-9">
+                        <h5>Name: {{ item.name if item.name else 'No name available' }}</h5>
+                        <p>Price: {{ item.price if item.price else 'No price available' }}</p>
+                        <p>Description: {{ item.description if item.description else 'No description available' }}</p>
+                        <button class="btn btn-primary btn-block add-to-cart-inside-btn" data-id="{{ item_key }}" data-name="{{ item.name }}" data-image="{{ item.image }}" data-price="{{ item.price }}">Add to Cart</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="back-to-shop mt-4"><a href="{{ url_for('index') }}">&leftarrow; Back to shop</a></div>
+    </div>
+</body>
+</html>

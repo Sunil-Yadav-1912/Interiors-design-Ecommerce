@@ -1,0 +1,107 @@
+<!-- Start Footer Section -->
+<footer class="footer-section">
+    <div class="container relative">
+
+        <div class="sofa-img">
+            <img src="{{url_for('static', filename='images/sofa.png')}}" alt="Image" class="img-fluid">
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="subscription-form">
+                    <h3 class="d-flex align-items-center">
+                        <span class="me-1">
+                            <img src="{{url_for('static', filename='images/envelope-outline.svg')}}" alt="Image" class="img-fluid">
+                        </span>
+                        <span>Subscribe to Newsletter</span>
+                    </h3>
+        
+                    <form action="{{ url_for('subscribe') }}" method="post" class="row g-3">
+                        <div class="col-auto">
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="col-auto">
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="fa fa-paper-plane"></span>
+                            </button>
+                        </div>
+                    </form>
+        
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
+                <p class="mb-4">We strive to provide the best service possible. Our commitment to excellence ensures that your experience with us is seamless and enjoyable. From start to finish, we prioritize your satisfaction, delivering results that exceed expectations.</p>
+
+                <ul class="list-unstyled custom-social">
+                    <li><a href="https://github.com/Sunil-Yadav-1912" target = "_blank"><span class="fa fa-brands fa-github"></span></a></li>
+                    <li><a href="https://www.linkedin.com/in/sunilkumar-yadav-2k4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target = "_blank"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                    <li><a href="https://www.discordapp.com/users/1202501567027216387" target = "_blank"><span class="fa fa-brands fa-discord"></span></a></li>
+                    <li><a href="https://www.instagram.com/sunil_yadav_1912?igsh=ZGUzMzM3NWJiOQ==" target = "_blank"><span class="fa fa-brands fa-instagram"></span></a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="row links-wrap">
+                    <div class="col-6 col-sm-6 col-md-4">
+                        <ul class="list-unstyled">
+                            <li><a href="{{ url_for('shop')}}">Shop</a></li>
+                            <li><a href="{{ url_for('about')}}">About us</a></li>
+                            <li><a href="{{ url_for('services')}}">Services</a></li>
+                            <li><a href="{{ url_for('blog')}}">Blog</a></li>
+                            <li><a href="{{ url_for('contact')}}">Contact us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-4">
+                        <h6>My Projects</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="https://github.com/Sunil-Yadav-1912/Automated-Chabot" target = "_blank">Automated Chatbot</a></li>
+                            <li><a href="https://github.com/Sunil-Yadav-1912/E-Commerce" target = "_blank">Digital Deals (Ecommerce)</a></li>
+                            <li><a href="https://github.com/Sunil-Yadav-1912/Interiors-design-Ecommerce" target = "_blank">Interior Designs (This)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-4">
+                        <h6>My Social Links</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="https://yadavsunilkumar998.wixsite.com/sunil-yadav" target = "_blank">PortFolio</a></li>
+                            <li><a href="https://www.linkedin.com/in/sunilkumar-yadav-2k4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target = "_blank">LinkedIn</a></li>
+                            <li><a href="https://github.com/Sunil-Yadav-1912" target = "_blank">Github</a></li>
+                            <li><a href="https://www.discordapp.com/users/1202501567027216387" target = "_blank">Discord</a></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="border-top copyright">
+            <div class="row pt-4">
+                <div class="col-lg-6">
+                    <p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://yadavsunilkumar998.wixsite.com/sunil-yadav">Sunil Yadav</a>
+                    </p>
+                </div>
+
+                <div class="col-lg-6 text-center text-lg-end">
+                    <ul class="list-unstyled d-inline-flex ms-auto">
+                        <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</footer>
+<!-- End Footer Section -->	
