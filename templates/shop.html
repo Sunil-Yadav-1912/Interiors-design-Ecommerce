@@ -71,7 +71,7 @@
 							<h3 class="product-title">{{ item.name }}</h3>
 							<strong class="product-price">{{ item.price }}</strong>
 							<span class="icon-cross">
-								<img src="{{ url_for('static', filename='images/cross.svg') }}" class="img-fluid" alt="Cross Icon">
+								<img src="{{ url_for('static', filename='images/cross.svg') }}" class="img-fluid cross-icon" alt="Cross Icon" data-id="{{ item_key }}" data-name="{{ item.name }}" data-image="{{ item.image }}" data-price="{{ item.price }}">
 							</span>
 						</a>
 					</div>
@@ -96,6 +96,8 @@
 
 	<!-- <script src="js/custom.js"></script> -->
 	<script src="{{url_for('static', filename='js/custom.js')}}"></script>
+	<script src="{{url_for('static', filename='js/cart.js')}}"></script>
+
 	</body>
 
 </html>

@@ -15,12 +15,12 @@
             {% for item_key, item in resp.interior_designs.items() %}
             {% if loop.index <= 3 %}
             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                <a class="product-item" href="cart.html">
+                <a class="product-item" href="#">
                     <img src="{{ url_for('static', filename='images/' + item.image) }}" class="img-fluid product-thumbnail" alt="{{ item.name }}">
                     <h3 class="product-title">{{ item.name }}</h3>
                     <strong class="product-price">{{ item.price }}</strong>
-                    <span class="icon-cross">
-                        <img src="{{ url_for('static', filename='images/cross.svg') }}" class="img-fluid" alt="Cross Icon">
+					<span class="icon-cross">
+                        <img src="{{ url_for('static', filename='images/cross.svg') }}" class="img-fluid cross-icon" alt="Cross Icon" data-id="{{ item_key }}" data-name="{{ item.name }}" data-image="{{ item.image }}" data-price="{{ item.price }}">
                     </span>
                 </a>
             </div>
