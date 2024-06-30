@@ -137,6 +137,15 @@ def submitBlog(data):
             return 1,resp
         else:
             return 0,resp
+        
+
+def getUser(data):
+    path = DBNAME+"/users"
+
+    success,resp,key = database().query_data_user(path,data)
+    print(resp)
+    
+    return success,resp
 
     
 

@@ -148,7 +148,7 @@ def moreInfo():
     return render_template("info.html", resp=items_dict)
     
 
-@app.route('/myorders')
+@app.route('/myorders', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def myorders():
     data = {
         "username": session['username']
@@ -161,7 +161,7 @@ def myorders():
 
     else:
         username = session['username']
-        return render_template("myorders.html", resp=resp,username=username)
+    return render_template("orders.html", resp=resp,username=username)
 
 
 @app.route('/order-cancel', methods=['POST'])
@@ -215,47 +215,18 @@ def add_to_cart():
 @app.route('/order', methods=['POST'])
 def order():
     # Get the order data from the request
-    order_data = request.json
+    if 'checkout_data' in session:
+        order_details = session['checkout_data']
+    if 'totalAmount' in session:
+        total_amount = session['totalAmount']
+    if 'user_data' in session:
+        user_data = session['user_data']
 
-    processed_keys = set()
-    orders = []
-
-    cart_order = {
-        'items': order_data.get('items'),
-        'totalAmount': order_data.get('totalAmount'),
-        'shipping': order_data.get('shipping'),
-        'discountCode': order_data.get('discountCode')
-    }
-
-
-    for item in cart_order['items']:
-
-        if item['itemId'] in processed_keys:
-            continue  # Skip if the item key has already been processed
-        processed_keys.add(item['itemId'])
-    
-        item_name = item['name']
-        item_price = item['price']
-        print(f"Item: {item_name}, Price: ${item_price}")
-        order = {
-            'key': item['itemId'],
-            'quantity': item['quantity'],
-            'name': item['name'],
-            'price': item['price'],
-            'image': item['image'],
-            'shipping': cart_order['shipping'],
-            'discountCode': cart_order['discountCode'],
-        }
-
-
-    
-    orders.append(order)
-
-    resp = email.send_order_email(cart_order)
+    resp = email.send_order_email(order_details=order_details,user_details=user_data,total_amount=total_amount)
     data = {
         "username": session['username']
     }    
-    success,resp = main.addToOrders(orders,data)
+    success,resp = main.addToOrders(order_details,data)
     if success != 1:
         return render_template('error.html', message=resp)
     else:
@@ -305,6 +276,66 @@ def submit_blog():
     return jsonify({
         'message': 'Blog submitted successfully'
     })
+
+@app.route('/redirect', methods=['POST'])
+def redirect_to_checkout():
+    # data = request.get_json()
+    processed_keys = set()
+    data = request.get_json()
+    orders = []
+
+    cart_order = {
+        'items': data['data'].get('items'),
+        'totalAmount': data['data'].get('total'),
+        'discountCode': data['data'].get('coupon')
+    }
+
+
+    for item in cart_order['items']:
+
+        if item['itemId'] in processed_keys:
+            continue  # Skip if the item key has already been processed
+        processed_keys.add(item['itemId'])
+    
+        item_name = item['name']
+        item_price = item['price']
+        print(f"Item: {item_name}, Price: ${item_price}")
+        order = {
+            'key': item['itemId'],
+            'quantity': item['quantity'],
+            'name': item['name'],
+            'price': item['price'],
+            'image': item['image'],
+            'discountCode': cart_order['discountCode'],
+        }
+
+        orders.append(order)
+
+    session['totalAmount'] = cart_order['totalAmount']
+    session['checkout_data'] = orders  # Store data in session
+    return jsonify({'success': True})
+
+@app.route('/checkout')
+def checkout():
+    data = {}
+    amount = {}
+    if 'checkout_data' in session:
+        data = session['checkout_data']
+    if 'totalAmount' in session:
+        amount = session['totalAmount']
+
+
+    login_data = {
+        "username": session['username']
+    }
+    
+    success,resp = main.getUser(login_data)
+    if success != 1:
+        # return redirect(url_for('error', message=resp))
+        return render_template('error.html', message=resp)
+    else:
+        session['user_data'] = resp
+        return render_template('checkout.html', order_data=data, user_data=resp,amount=amount)
 
 
 if __name__ == "__main__":

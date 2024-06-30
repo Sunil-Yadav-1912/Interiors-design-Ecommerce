@@ -68,23 +68,18 @@
                     <!-- <div class="row"><span id="description-{{ item_key }}">{{ item.description }}</span></div> -->
 
                   </td>
-                  <td id="price-{{ item.id }}">${{ item.price }}</td>
+                  <td id="price-{{ item.id }}">${{ item.price / item.quantity }}</td>
                   <!-- <div class="col"><span id="price-{{ item_key }}">{{ item.price }}</span> <span class="close">&#10005;</span></div> -->
 
                   <td>
                     <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-outline-black decrease quantity-btn" data-item-id="{{ item_key }}" data-increment="-" type="button">&minus;</button>
-                      </div>
-                      <span class="form-control text-center" id="quantity-{{ item_key }}">1</span>
+
+                      <span class="form-control text-center" id="quantity-{{ item_key }}">{{item.quantity}}</span>
                       <!-- <input type="text" class="form-control text-center quantity-amount" id="quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1"> -->
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-black increase quantity-btn" data-item-id="{{ item_key }}" data-increment="+" type="button">&plus;</button>
-                      </div>
                     </div>
                   </td>
                   <td id="price"><span id="price-{{ item_key }}">${{ item.price }}</span></td>
-                  <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                  <td><button class="btn btn-danger cancel-btn" data-item-id="{{ item_key }}">X</button></td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -95,7 +90,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <div class="row mb-5">
+          <!-- <div class="row mb-5">
             <div class="col-md-6 mb-3 mb-md-0">
               <button class="btn btn-black btn-sm btn-block">Update Cart</button>
             </div>
@@ -119,14 +114,14 @@
             <div class="col-md-4">
               <button class="btn btn-black">Apply Coupon</button>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-6 pl-5">
           <div class="row justify-content-end">
             <div class="col-md-7">
               <div class="row">
                 <div class="col-md-12 text-right border-bottom mb-5">
-                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                  <h3 class="text-black h4 text-uppercase">Order Totals</h3>
                 </div>
               </div>
               <div class="row mb-3">
@@ -146,11 +141,11 @@
                 </div>
               </div>
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12">
-                  <button class="btn btn-black btn-lg py-3 btn-block" id="proceedToCheckout">Proceed To Checkout</button>
+                  <button class="btn btn-black btn-lg py-3 btn-block" id="cancell_all">Cancell All</button>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -161,6 +156,7 @@
   <!-- Start footer Section -->
   {% include 'footer.html' %}
   <!-- End footer Section -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/tiny-slider.js') }}"></script>
@@ -203,158 +199,35 @@
       itemCountElement.textContent = calculateTotalQuantity();
   });
 
-  // Add event listeners to quantity buttons
-  document.querySelectorAll('.quantity-btn').forEach(button => {
-      button.addEventListener('click', function() {
+  $('.cancel-btn').click(function() {
+    var orderId = $(this).data('item-id');
+    // Show loader
+    $('#loaderContainer').show();
+    // Make AJAX request to cancel-order endpoint
+    $.ajax({
+        url: 'order-cancel',
+        type: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({ orderId: orderId }),
+        success: function(response) {
+            // Hide loader
+            $('#loaderContainer').hide();
+            // Handle success response
+            console.log('Order cancelled successfully.');
+            location.reload();
 
-          const itemId = this.getAttribute('data-item-id');
-          const increment = this.getAttribute('data-increment');
-          const quantityElement = document.getElementById(`quantity-${itemId}`);
-          const priceElement = document.getElementById(`price-${itemId}`);
-          let quantity = parseInt(quantityElement.textContent);
-          let price = parseFloat(priceElement.textContent.replace('$', '')); // Remove currency symbol
-
-          // Retrieve item object from cartData
-          const item = cartData[itemId];
-
-          if (increment === '-') {
-              if (quantity > 1) {
-                  quantity--;
-                  price -= parseFloat(item.price.replace('$', '')); // Remove currency symbol
-              }
-          } else {
-              quantity++;
-              price += parseFloat(item.price.replace('$', '')); // Remove currency symbol
-          }
-
-          quantityElement.textContent = quantity;
-          priceElement.textContent = '$' + price.toFixed(2); // Add currency symbol back
-
-          // Update total amount and quantity
-          const totalAmountElement = document.getElementById('total-amount');
-          const totalAmountElement2 = document.getElementById('total-amount-2');
-          const itemCountElement = document.getElementById('item-count');
-          totalAmountElement.textContent = '$' + calculateTotalAmount();
-          totalAmountElement2.textContent = '$' + calculateTotalAmount();
-          itemCountElement.textContent = calculateTotalQuantity();
-      });
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-  const buyNowBtn = document.getElementById('buyNowBtn');
-
-  
-  document.getElementById('proceedToCheckout').addEventListener('click', function() {
-  const items = [];
-  document.querySelectorAll('.quantity-btn').forEach(button => {
-    const itemId = button.getAttribute('data-item-id');
-    const quantity = parseInt(document.getElementById(`quantity-${itemId}`).textContent);
-    const name = document.getElementById(`name-${itemId}`).textContent;
-    const image = document.getElementById(`image-${itemId}`).textContent;
-    const priceElement = document.getElementById(`price-${itemId}`);
-    const price = parseFloat(priceElement.textContent.replace('$', ''));
-    items.push({ itemId, quantity, price, name, image });
-  });
-
-  const subtotal = parseFloat(document.getElementById('total-amount').textContent.replace('$', ''));
-  const total = parseFloat(document.getElementById('total-amount-2').textContent.replace('$', ''));
-  const coupon = document.getElementById('coupon').value;
-
-  const data = {
-    items: items,
-    subtotal: subtotal.toFixed(2),
-    total: total.toFixed(2),
-    coupon: coupon
-  };
-
-  fetch('/redirect', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({data:data})
-  })
-  .then(response => {
-      if (response.ok) {
-          // Redirect user to the checkout page
-          window.location.href = '/checkout';
-      } else {
-          // Handle error response
-          console.error('Error:', response.status);
-      }
-  })
-  .catch(error => console.error('Error:', error));
-  });
-
-  buyNowBtn.addEventListener('click', function() {
-      const spinner = document.getElementById('spinner');
-      spinner.style.display = 'block';
-      
-      const items = [];
-      const totalAmountText = document.getElementById('total-amount').textContent;
-      // var totalAmount = parseFloat(totalAmountText.replace('$', ''));
-
-      // Iterate over each item in the cart
-      document.querySelectorAll('.quantity-btn').forEach(button => {
-          const itemId = button.getAttribute('data-item-id');
-          const quantity = parseInt(document.getElementById(`quantity-${itemId}`).textContent);
-          // const price = parseFloat(document.getElementById(`price-${itemId}`).textContent);
-          const name = document.getElementById(`name-${itemId}`).textContent; // Get the name of the item
-          const image = document.getElementById(`image-${itemId}`).textContent; // Get the image source of the item
-          const priceElement = document.getElementById(`price-${itemId}`);
-          const price = parseFloat(priceElement.textContent.replace('$', ''));
-          // totalAmount = quantity * price ;
-          items.push({ itemId, quantity, price, name, image }); 
-      });
-
-      const shipping = document.querySelector('select').value;
-      const discountCode = document.getElementById('coupon').value;
-
-      // Construct the data object to send to the API
-      const data = {
-          items,
-          totalAmount,
-          shipping,
-          discountCode
-      };
-
-
-      // Make an AJAX POST request to your API endpoint
-      fetch('/order', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          // body: JSON.stringify(data)
-          body: JSON.stringify({
-                items: items,
-                totalAmount: totalAmount,
-                shipping: shipping,
-                discountCode: discountCode
-          })
-      })
-      .then(response => {
-          spinner.style.display = 'none';
-
-          if (response.ok) {
-              // Redirect to another page if response is successful
-              window.location.href = '/order-confirmed';
-              alert('Congrats: Order Confirmed ');
-
-          } else {
-              // Handle other response statuses
-              alert('Error: ' + response.message);
-          }
-      })
-      .catch(error => {
-          spinner.style.display = 'none';
-
-          // Handle error
-          console.error('Error:', error);
-          // Optionally, display an error message to the user
-      });
-  });
-  });
+            // Optionally, update the UI to reflect the cancelled order
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            // Hide loader
+            $('#loaderContainer').hide();
+            console.error('Error cancelling order:', error);
+        }
+    });
+});
 
 </script>
 </body>
