@@ -249,6 +249,29 @@ def subscribe():
     # Redirect to a thank you page or back to home
     return redirect(url_for('index'))
 
+@app.route('/send_contact_us_email', methods=['POST'])
+def contact_us_email():
+    data = request.json
+
+    first_name = data.get('fname')
+    last_name = data.get('lname')
+    user_email = data.get('email')
+    message = data.get('message')
+
+    data = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': user_email,
+            'message': message,
+            'username' : session['username']
+        }
+    # Send the subscription email
+    resp = email.send_contact_us_email(data)
+
+    # Redirect to a thank you page or back to home
+    return jsonify({'message': 'Email sent successfully'}), 200
+
+
 @app.route('/submit_blog', methods=['POST'])
 def submit_blog():
     # Get form data

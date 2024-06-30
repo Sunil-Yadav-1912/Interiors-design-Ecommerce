@@ -1,87 +1,108 @@
 <!-- Start Header/Navigation -->
 <style>
-.box {
-    background-color: #ffffff; /* White background for the box */
-    padding: 15px;
-    border-radius: 20px; /* Rounded corners */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px; /* Space between the boxes */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
-    width: 120px; /* Fixed width */
-    height: 120px; /* Fixed height */
-    text-align: center; /* Center text inside the box */
-}
-
-.box:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-}
-
-.icon-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center content vertically */
-}
-
-.icon-text-container i {
-    margin-bottom: 8px;
-    color: #004d40; /* Change icon color to peacock green */
-}
-
-.icon-text-container span {
-    color: #004d40; /* Text color matching the peacock green background */
-    font-size: 16px; /* Adjust the font size as needed */
-    font-weight: bold;
-}
-</style>
-<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-
-    <div class="container">
-        <a class="navbar-brand" href="{{ url_for('index')}}">Furni<span>.</span></a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsFurni">
-            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li>
-                    <a class="nav-link" href="{{ url_for('myorders') }}">
-                        <div class="box">
-                            <div class="icon-text-container">
-                                <i class="fa fa-truck" aria-hidden="true" style="font-size:20px;"></i>
-                                <span>Orders</span>
+    .box {
+        background-color: #fff; /* White background for the box */
+        padding: 10px;
+        border-radius: 20px; /* Rounded corners */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px; /* Space between the boxes */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+        width: 120px; /* Fixed width */
+        text-align: center; /* Center text inside the box */
+    }
+    
+    .box:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    }
+    
+    .icon-text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .icon-text-container i {
+        margin-bottom: 8px;
+        color: #004d40; /* Change icon color to peacock green */
+    }
+    
+    .icon-text-container span {
+        color: #004d40; /* Text color matching the peacock green background */
+        font-size: 16px; /* Adjust the font size as needed */
+        font-weight: bold;
+    }
+    
+    .nav-link.active {
+        text-decoration: underline; /* Underline for active link */
+    }
+    </style>
+    <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index')}}">Furni<span>.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarsFurni">
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'shop' %}active{% endif %}" href="{{ url_for('shop')}}">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about')}}">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'services' %}active{% endif %}" href="{{ url_for('services')}}">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'blog' %}active{% endif %}" href="{{ url_for('blog')}}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}" href="{{ url_for('contact')}}">Contact us</a>
+                    </li>
+                </ul>
+    
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('myorders') }}">
+                            <div class="box">
+                                <div class="icon-text-container">
+                                    <i class="fa fa-truck" aria-hidden="true" style="font-size:20px;"></i>
+                                    <span>Orders</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{{ url_for('cart') }}">
-                        <div class="box">
-                            <div class="icon-text-container">
-                                <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i>
-                                <span>Cart</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('cart') }}">
+                            <div class="box">
+                                <div class="icon-text-container">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i>
+                                    <span>Cart</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{{ url_for('index') }}">
-                        <div class="box">
-                            <div class="icon-text-container">
-                                <i class="fa fa-user" aria-hidden="true" style="font-size:20px;"></i>
-                                <span>{{session['username']}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <div class="box">
+                                <div class="icon-text-container">
+                                    <i class="fa fa-user" aria-hidden="true" style="font-size:20px;"></i>
+                                    <span>{{session['username']}}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>            
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-        
-</nav>
-<!-- End Header/Navigation -->
+    </nav>
+    <!-- End Header/Navigation -->
+    

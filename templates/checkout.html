@@ -279,8 +279,10 @@
 	}
 
 	function updateOrderDetails() {
-		const data = [{"discountCode": "coupon2", "image": "product-2.png", "key": "-Nw-Rk2r2xqe62OHCGh", "name": "Soft Cushion Chair", "price": 16800, "quantity": 4}, {"discountCode": "coupon2", "image": "product-1.png", "key": "-Nw-Rk2r2xqe62OHCHBC", "name": "Cushion Chair", "price": 3900, "quantity": 1}]; // Data from Flask
-		const totalAmount = "20700.00"; // Data from Flask
+		const data = {{ order_data|tojson }}; // Data from Flask
+
+		// const data = [{"discountCode": "coupon2", "image": "product-2.png", "key": "-Nw-Rk2r2xqe62OHCGh", "name": "Soft Cushion Chair", "price": 16800, "quantity": 4}, {"discountCode": "coupon2", "image": "product-1.png", "key": "-Nw-Rk2r2xqe62OHCHBC", "name": "Cushion Chair", "price": 3900, "quantity": 1}]; // Data from Flask
+		const totalAmount = {{ amount }}; // Data from Flask
 
 		console.log('Order data:', data); // Debugging log
 

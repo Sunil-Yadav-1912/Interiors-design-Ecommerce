@@ -1,25 +1,6 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import config
-
+from models.email_model import send_email
 
 def send_order_email(order_details, user_details, total_amount):
-    # Email configurations
-    smtp_server = config.SMTP_SERVER
-    smtp_port = config.SMTP_PORT
-    smtp_username = config.SMTP_USERNAME
-    smtp_password = config.SMTP_PASSWORD
-    sender_email = config.SENDER_EMAIL
-    recipient_email = config.RECIPIENT_EMAIL
-
-    # Construct the message
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = 'Order Details'
-
-    # Construct the email body
     email_body = "Order Details:\n\n"
     email_body += f"Customer Name: {user_details.get('first_name', 'N/A')} {user_details.get('last_name', 'N/A')}\n"
     email_body += f"Email: {user_details.get('email', 'N/A')}\n"
@@ -30,49 +11,18 @@ def send_order_email(order_details, user_details, total_amount):
     for item in order_details:
         email_body += f"Item ID: {item.get('itemId', 'N/A')}, Name: {item.get('name', 'N/A')}, Quantity: {item.get('quantity', 'N/A')}, Price: ${item.get('price', 0.00):.2f}, Discount Coupon: ${item.get('discountCode', 0.00)}\n"
     email_body += "\n"
-    msg.attach(MIMEText(email_body, 'plain'))
-
-    # Connect to the SMTP server
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    server.starttls()
-    server.login(smtp_username, smtp_password)
-
-    # Send the email
-    server.sendmail(sender_email, recipient_email, msg.as_string())
-
-    # Close the connection
-    server.quit()
-
+    send_email('Order Details', email_body)
     return 1
 
 def send_subscription_email(name, email):
-    # Email configurations
-    smtp_server = config.SMTP_SERVER
-    smtp_port = config.SMTP_PORT
-    smtp_username = config.SMTP_USERNAME
-    smtp_password = config.SMTP_PASSWORD
-    sender_email = config.SENDER_EMAIL
-    recipient_email = config.RECIPIENT_EMAIL
-
-    # Construct the message
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = 'New Subscription'
-
-    # Construct the email body
     email_body = f"New subscription details:\n\n"
     email_body += f"Name: {name}\n"
     email_body += f"Email: {email}\n"
-    msg.attach(MIMEText(email_body, 'plain'))
+    send_email('New Subscription', email_body)
 
-    # Connect to the SMTP server
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    server.starttls()
-    server.login(smtp_username, smtp_password)
-
-    # Send the email
-    server.sendmail(sender_email, recipient_email, msg.as_string())
-
-    # Close the connection
-    server.quit()
+def send_contact_us_email(data):
+    email_body = f"New contact us message:\n\n"
+    email_body += f"First name: {data.get('first_name', 'N/A')}  Last name : {data.get('last_name', 'N/A')}\n\n"
+    email_body += f"Email: {data.get('email', 'N/A')}\n\n"
+    email_body += f"Message: {data.get('message', 'N/A')}\n"
+    send_email('Contact us message', email_body)
