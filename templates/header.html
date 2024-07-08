@@ -36,9 +36,31 @@
         font-weight: bold;
     }
     
-    .nav-link.active {
-        text-decoration: underline; /* Underline for active link */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #07766e;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
     }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a {
+        background-color: #004d40; /* Change to a light background color */
+        color: black; /* Ensure the text remains black */
+    }
+
+    .nav-item.active .dropdown-content {
+        display: block;
+    }
+
     </style>
     <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
         <div class="container">
@@ -90,19 +112,41 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item dropdown" id="userDropdown">
                         <a class="nav-link" href="{{ url_for('index') }}">
                             <div class="box">
                                 <div class="icon-text-container">
                                     <i class="fa fa-user" aria-hidden="true" style="font-size:20px;"></i>
-                                    <span>{{session['username']}}</span>
+                                    <span>{{session.get('username')}}</span>
                                 </div>
                             </div>
                         </a>
-                    </li>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('view_profile') }}">Go to Profile Edit</a>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </li>           
                 </ul>
             </div>
         </div>
     </nav>
+
+<script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                this.classList.toggle('active');
+            });
+
+            // Close the dropdown if clicked outside of it
+            window.addEventListener('click', function(event) {
+                if (!userDropdown.contains(event.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+        });
+</script>
+
     <!-- End Header/Navigation -->
     

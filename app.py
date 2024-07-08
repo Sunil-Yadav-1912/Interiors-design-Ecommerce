@@ -30,6 +30,17 @@ def home():
 def about():
     return render_template("about.html")
 
+@app.route("/view_profile")
+def view_profile():
+    return render_template("profile.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
+    # return render_template("about.html")
+
+
 @app.route("/create-blog")
 def create_blog():
     return render_template("create_blog.html")
@@ -298,6 +309,50 @@ def submit_blog():
     # Return response
     return jsonify({
         'message': 'Blog submitted successfully'
+    })
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    # Get form data
+    country = request.form.get('country')
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    username = request.form.get('username')
+    password = request.form.get('password')
+    email = request.form.get('email')
+    mobile = request.form.get('mobile')
+    state = request.form.get('state')
+    address = request.form.get('address')
+
+    # profile_image = request.form.get('profile_image')
+
+    profile_image = request.files.get('profile_image')
+    # if profile_image:
+    # filename = secure_filename(profile_image.filename)
+    #     profile_image.save(os.path.join(app.config['STORAGE_URL'], filename))
+
+
+    # Save blog details to Firestore
+
+    data = {
+        'country': country,
+        'first_name': first_name,
+        'last_name': last_name,
+        'username': username,
+        'password': password,
+        'email': email,
+        'mobile': mobile,
+        'state': state,
+        'address': address,
+        'profile_image': profile_image,
+        'username' : session['username']
+
+    }
+    success,resp = main.update_profile(data)
+
+    # Return response
+    return jsonify({
+        'message': 'Updated profile submitted successfully'
     })
 
 @app.route('/redirect', methods=['POST'])

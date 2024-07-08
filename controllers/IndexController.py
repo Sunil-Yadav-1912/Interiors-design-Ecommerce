@@ -138,6 +138,25 @@ def submitBlog(data):
         else:
             return 0,resp
         
+def update_profile(data):
+    path = DBNAME+"/users"
+
+    success,resp,key = database().query_data_user(path,data)
+    if success == 1 :
+        path = "profile/"
+        bucket_name = DBNAME
+        bucket_name = STORAGE_URL
+        success,url = database().upload_image(path,bucket_name,data['profile_image'])
+
+        if success == 1 :
+            data['profile_image'] = url
+            path = DBNAME+"/users/"+key
+            resp = database().update(path,data)
+            print(resp)
+            return 1,resp
+        else:
+            return 0,resp
+        
 
 def getUser(data):
     path = DBNAME+"/users"

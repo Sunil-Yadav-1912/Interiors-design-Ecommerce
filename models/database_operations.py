@@ -95,9 +95,9 @@ class database_operations:
     
     def upload_image(self,path,bucket_name,data):
         db,storage = Connection.get_connection()
-        path = "interior-designs/blogs"
+        path = "interior-designs/"+path
 
-        bucket = storage.bucket('digital-deals-1912')  # Retrieve the default bucket
+        bucket = storage.bucket(bucket_name)  # Retrieve the default bucket
         blob = bucket.blob(path)
         blob.upload_from_file(
             data,
