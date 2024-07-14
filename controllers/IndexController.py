@@ -27,8 +27,11 @@ def Login(username, password):
 
     path = DBNAME+"/users" 
     success,resp,key = database().query_data_user(path,data)
-
-    return success,resp['username']
+    if 'profile_image' in resp:
+        profile_image = resp['profile_image']
+    else:
+        profile_image = ""
+    return success,resp['username'],profile_image
 
 
 def category(category):
@@ -143,19 +146,16 @@ def update_profile(data):
 
     success,resp,key = database().query_data_user(path,data)
     if success == 1 :
-        path = "profile/"
-        bucket_name = DBNAME
-        bucket_name = STORAGE_URL
-        success,url = database().upload_image(path,bucket_name,data['profile_image'])
+        path = "profile/" + data['profile_image'].filename
+        success,url = database().upload_image(path,data['profile_image'])
 
         if success == 1 :
             data['profile_image'] = url
             path = DBNAME+"/users/"+key
             resp = database().update(path,data)
-            print(resp)
-            return 1,resp
+            return 1,resp,url
         else:
-            return 0,resp
+            return 0,resp,url
         
 
 def getUser(data):

@@ -93,19 +93,24 @@ class database_operations:
 
         return 1,val,key
     
-    def upload_image(self,path,bucket_name,data):
-        db,storage = Connection.get_connection()
-        path = "interior-designs/"+path
+    def upload_image(self,path,data):
+        _, storage_client = Connection.get_connection()
 
-        bucket = storage.bucket(bucket_name)  # Retrieve the default bucket
+        path = "interior-designs/" + path # Ensure a complete path including the filename
+
+        bucket = storage_client.bucket()
         blob = bucket.blob(path)
-        blob.upload_from_file(
-            data,
-            content_type=data.content_type
-        )
+        
+        # Upload file data directly
+        blob.upload_from_string(data.read(), content_type=data.content_type)
+        
+        # Make the file public
+        blob.make_public()
+    
         url = blob.public_url
-        if url != "":
+
+        if url:
             return 1, url
         else:
-            return 0,""
+            return 0, ""
 

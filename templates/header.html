@@ -13,29 +13,29 @@
         width: 120px; /* Fixed width */
         text-align: center; /* Center text inside the box */
     }
-    
+
     .box:hover {
         transform: translateY(-5px); /* Slight lift on hover */
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
     }
-    
+
     .icon-text-container {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
+
     .icon-text-container i {
         margin-bottom: 8px;
         color: #004d40; /* Change icon color to peacock green */
     }
-    
+
     .icon-text-container span {
         color: #004d40; /* Text color matching the peacock green background */
         font-size: 16px; /* Adjust the font size as needed */
         font-weight: bold;
     }
-    
+
     .dropdown-content {
         display: none;
         position: absolute;
@@ -61,92 +61,99 @@
         display: block;
     }
 
-    </style>
-    <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index')}}">Furni<span>.</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarsFurni">
-                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index')}}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'shop' %}active{% endif %}" href="{{ url_for('shop')}}">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about')}}">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'services' %}active{% endif %}" href="{{ url_for('services')}}">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'blog' %}active{% endif %}" href="{{ url_for('blog')}}">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}" href="{{ url_for('contact')}}">Contact us</a>
-                    </li>
-                </ul>
-    
-                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('myorders') }}">
-                            <div class="box">
-                                <div class="icon-text-container">
-                                    <i class="fa fa-truck" aria-hidden="true" style="font-size:20px;"></i>
-                                    <span>Orders</span>
-                                </div>
+    .profile-image {
+        width: 30px; /* Adjust the size as needed */
+        height: 30px;
+        border-radius: 50%; /* Make it circular */
+        object-fit: cover; /* Ensure the image covers the entire area */
+        margin-right: 8px; /* Space between image and text */
+    }
+</style>
+
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index')}}">Furni<span>.</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'shop' %}active{% endif %}" href="{{ url_for('shop')}}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about')}}">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'services' %}active{% endif %}" href="{{ url_for('services')}}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'blog' %}active{% endif %}" href="{{ url_for('blog')}}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'contact' %}active{% endif %}" href="{{ url_for('contact')}}">Contact us</a>
+                </li>
+            </ul>
+
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('myorders') }}">
+                        <div class="box">
+                            <div class="icon-text-container">
+                                <i class="fa fa-truck" aria-hidden="true" style="font-size:20px;"></i>
+                                <span>Orders</span>
                             </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('cart') }}">
-                            <div class="box">
-                                <div class="icon-text-container">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i>
-                                    <span>Cart</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown" id="userDropdown">
-                        <a class="nav-link" href="{{ url_for('index') }}">
-                            <div class="box">
-                                <div class="icon-text-container">
-                                    <i class="fa fa-user" aria-hidden="true" style="font-size:20px;"></i>
-                                    <span>{{session.get('username')}}</span>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="{{ url_for('view_profile') }}">Go to Profile Edit</a>
-                            <a href="{{ url_for('logout') }}">Logout</a>
                         </div>
-                    </li>           
-                </ul>
-            </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cart') }}">
+                        <div class="box">
+                            <div class="icon-text-container">
+                                <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i>
+                                <span>Cart</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item dropdown" id="userDropdown">
+                    <a class="nav-link" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="box">
+                            <div class="icon-text-container">
+                                <img src="{{ session.get('profile_image') }}" alt="Profile Image" class="profile-image">
+                                <span>{{session.get('username')}}</span>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ url_for('view_profile') }}">Go to Profile Edit</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const userDropdown = document.getElementById('userDropdown');
-            userDropdown.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default action of the link
-                this.classList.toggle('active');
-            });
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const userDropdown = document.getElementById('dropdownMenuLink');
 
-            // Close the dropdown if clicked outside of it
-            window.addEventListener('click', function(event) {
-                if (!userDropdown.contains(event.target)) {
-                    userDropdown.classList.remove('active');
-                }
-            });
+        userDropdown.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default action of the link
+            this.parentElement.classList.toggle('active');
         });
-</script>
 
-    <!-- End Header/Navigation -->
-    
+        // Close the dropdown if clicked outside of it
+        window.addEventListener('click', function(event) {
+            if (!userDropdown.contains(event.target)) {
+                document.getElementById('userDropdown').classList.remove('active');
+            }
+        });
+    });
+</script>
+<!-- End Header/Navigation -->

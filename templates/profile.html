@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,190 +5,210 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Untree.co">
   <link rel="shortcut icon" href="favicon.png">
-
   <meta name="description" content="" />
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
-		<!-- Bootstrap CSS -->
-		<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-		<!-- <link href="css/tiny-slider.css" rel="stylesheet"> -->
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/tiny-slider.css')}}"/>
-		<!-- <link href="css/style.css" rel="stylesheet"> -->
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tiny-slider.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}"/>
 
-		<title>Profile</title>
-	</head>
+  
+  <title>Profile</title>
+</head>
 
-	<body>
+<body>
 
+  <!-- Start Header/Navigation -->
+  {% include 'header.html' %}
+  <!-- End Header/Navigation -->
 
-	<!-- Start Header/Navigation -->
-
-	{% include 'header.html' %}
-
-	<!-- End Header/Navigation -->
-
-		<!-- Start Hero Section -->
-			<div class="hero">
-				<div class="container">
-					<div class="row justify-content-between">
-						<div class="col-lg-5">
-							<div class="intro-excerpt">
-								<h1>Profile</h1>
-								<p class="mb-4">Hello Sunil, You can edit your profile and delivery address here</p>
-							</div>
-						</div>
-						<div class="col-lg-7">
-							<div class="hero-img-wrap">
-								<img src="{{url_for('static', filename='images/couch.png')}}" class="img-fluid" alt="Modern Interior Design">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- End Hero Section -->
-        <!-- Blog Writing Section Start -->
-		<div class="untree_co-section">
-		    <div class="container">
-		      <div class="row">
-		        <div class="col-md-6 mb-5 mb-md-0">
-		          <h2 class="h3 mb-3 text-black">Profile Details</h2>
-		          <div class="p-3 p-lg-5 border bg-white">
-		            <div class="form-group row mb-3">
-		              <label for="country" class="text-black">Country <span class="text-danger">*</span></label>
-		              <select id="country" class="form-control">
-		                <option value="1">Select a country</option>
-                        <option value="2">India</option>    
-		                <option value="3">Algeria</option>    
-		                <option value="4">Afghanistan</option>    
-		                <option value="5">Ghana</option>    
-		                <option value="6">Albania</option>    
-		                <option value="7">Bahrain</option>    
-		                <option value="8">Colombia</option>    
-		                <option value="9">Dominican Republic</option>   
-		                <option value="10">bangladesh</option>    
-		              </select>
-		            </div>
-		            <div class="form-group  row mb-3">
-		              <div class="col-md-6">
-		                <label for="fname" class="text-black">First name<span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="fname" name="fname">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="lname" class="text-black">Last name<span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="lname" name="lname">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="uname" class="text-black">User name<span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="uname" name="uname">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="password" class="text-black">Password<span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="password" name="password">
-		              </div>
-		              <div class="col-md-6">
-		                <label for="email" class="text-black">Email <span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="email" name="email">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="mobile" class="text-black">Mobile <span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="mobile" name="mobile">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="state" class="text-black"> State <span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="state" name="state">
-		              </div>
-                      <div class="col-md-6">
-		                <label for="address" class="text-black">Address <span class="text-danger">*</span></label>
-		                <input type="text" class="form-control" id="address" name="address">
-		              </div>
-		            </div>
-		        </div>
-            </div>
-              <div class="col-md-6">
-                <div class="row mb-5">
-                  <div class="col-md-12">
-                    <h2 class="h3 mb-3 text-black">Profile Image</h2>
-                    <div class="p-3 p-lg-5 border bg-white">
-                        <label for="image" class="text-black mb-3">Upload the profile image</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-black btn-lg py-3 btn-block" id="btn-block">Update Profile</button>
-                  </div>
-		      </div>
-          
-		    </div>
-		  </div>
+  <!-- Start Hero Section -->
+  <div class="hero">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="intro-excerpt">
+            <h1>Profile</h1>
+            <p class="mb-4">Hello Sunil, You can edit your profile and delivery address here</p>
+          </div>
         </div>
+        <div class="col-lg-7">
+          <div class="hero-img-wrap">
+            <img src="{{ url_for('static', filename='images/couch.png') }}" class="img-fluid" alt="Modern Interior Design">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Hero Section -->
 
-		<!-- Start footer Section -->
+  <!-- Blog Writing Section Start -->
+  <div class="untree_co-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <h2 class="h3 mb-3 text-black">Profile Details</h2>
+          <div class="p-3 p-lg-5 border bg-white">
+            <div class="form-group row mb-3">
+              <label for="country" class="text-black">Country <span class="text-danger">*</span></label>
+              <select id="country" class="form-control">
+                <option value="1">Select a country</option>
+                <option value="2">India</option>    
+                <option value="3">Algeria</option>    
+                <option value="4">Afghanistan</option>    
+                <option value="5">Ghana</option>    
+                <option value="6">Albania</option>    
+                <option value="7">Bahrain</option>    
+                <option value="8">Colombia</option>    
+                <option value="9">Dominican Republic</option>   
+                <option value="10">Bangladesh</option>    
+              </select>
+            </div>
+            <div class="form-group row mb-3">
+              <div class="col-md-6">
+                <label for="fname" class="text-black">First name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="fname" name="fname">
+              </div>
+              <div class="col-md-6">
+                <label for="lname" class="text-black">Last name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="lname" name="lname">
+              </div>
+              <div class="col-md-6">
+                <label for="uname" class="text-black">User name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="uname" name="uname">
+              </div>
+              <div class="col-md-6">
+                <label for="password" class="text-black">Password<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="password" name="password">
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="text-black">Email <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="email" name="email">
+              </div>
+              <div class="col-md-6">
+                <label for="mobile" class="text-black">Mobile <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="mobile" name="mobile">
+              </div>
+              <div class="col-md-6">
+                <label for="state" class="text-black"> State <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="state" name="state">
+              </div>
+              <div class="col-md-6">
+                <label for="address" class="text-black">Address <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="address" name="address">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3 text-black">Profile Image</h2>
+              <div class="p-3 p-lg-5 border bg-white text-center">
+                <label for="image" class="text-black mb-3">Upload the profile image</label>
+                <input type="file" class="form-control" id="image" name="image">
+                <br>
+                <img id="profileImage" src="" class="img-fluid mt-3" alt="Profile Image" style="max-width: 200px;">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-black btn-lg py-3 btn-block" id="btn-block">Update Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		{% include 'footer.html' %}
+<!-- Start loader Section -->
+{% include 'loader.html' %}
+<!-- End loader Section -->
 
-		<!-- End footer Section -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Start footer Section -->
+  {% include 'footer.html' %}
+  <!-- End footer Section -->
 
-        <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
-        <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/tiny-slider.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
 
-        <!-- <script src="js/tiny-slider.js"></script> -->
-        <script src="{{url_for('static', filename='js/tiny-slider.js')}}"></script>
 
-        <!-- <script src="js/custom.js"></script> -->
-        <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+  <script>
+    $(document).ready(function() {
+      // Set form data
+      const profileData = {{ user_data|tojson }}; // Data from Flask
 
-        <script>
-            $(document).ready(function(){
-                $('#btn-block').click(function(e){
-                    e.preventDefault(); // Prevent default form submission
-                    
-                    // Get form data
-                    var country = $('#country').val();
-                    var firstName = $('#fname').val();
-                    var lastName = $('#lname').val();
-                    var userName = $('#uname').val();
-                    var password = $('#password').val();
-                    var email = $('#email').val();
-                    var mobile = $('#mobile').val();
-                    var state = $('#state').val();
-                    var address = $('#address').val();
-                    var profileImageFile = $('#image')[0].files[0]; // Get the selected file
-                    
-                    // Validate form fields (you can add more validation logic here)
-                    // if(country == '' || authorName == '' || authorEmail == '' || blogTitle == '' || blogContent == '') {
-                    //     alert('Please fill in all required fields');
-                    //     return;
-                    // }
-                    
-                    // Prepare form data with file
-                    var formData = new FormData();
-					formData.append('country', country);
-					formData.append('first_name', firstName);
-					formData.append('last_name', lastName);
-					formData.append('username', userName);
-					formData.append('password', password);
-					formData.append('email', email);
-					formData.append('mobile', mobile);
-					formData.append('state', state);
-					formData.append('address', address)
-                    formData.append('profile_image', profileImageFile);
+      $('#country').val(profileData.country);
+      $('#fname').val(profileData.first_name);
+      $('#lname').val(profileData.last_name);
+      $('#uname').val(profileData.username);
+      $('#password').val(profileData.password);
+      $('#email').val(profileData.email);
+      $('#mobile').val(profileData.mobile);
+      $('#state').val(profileData.state);
+      $('#address').val(profileData.address);
+      $('#profileImage').attr('src', profileData.profile_image);
 
-                    fetch('/update_profile', {
-                        method: 'POST',
-                        body: formData
-                    }).then(response => response.json())
-                    .then(data => console.log(data))
-                    .catch(error => console.error('Error:', error));
-                });
-            });
-        </script>
-        
+      $('#image').change(function() {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('#profileImage').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+      });
 
-	</body>
+      $('#btn-block').click(function(e) {
+        e.preventDefault();
+        const loaderContainer = document.getElementById('loader-container');
+        $('#loader-container').css('display', 'flex');
 
+        var country = $('#country').val();
+        var firstName = $('#fname').val();
+        var lastName = $('#lname').val();
+        var userName = $('#uname').val();
+        var password = $('#password').val();
+        var email = $('#email').val();
+        var mobile = $('#mobile').val();
+        var state = $('#state').val();
+        var address = $('#address').val();
+        var profileImageFile = $('#image')[0].files[0];
+
+        var formData = new FormData();
+        formData.append('country', country);
+        formData.append('first_name', firstName);
+        formData.append('last_name', lastName);
+        formData.append('username', userName);
+        formData.append('password', password);
+        formData.append('email', email);
+        formData.append('mobile', mobile);
+        formData.append('state', state);
+        formData.append('address', address);
+        formData.append('profile_image', profileImageFile);
+
+        fetch('/update_profile', {
+          method: 'POST',
+          body: formData
+        }).then(response => response.json())
+          .then(data => {
+			$('#loader-container').css('display', 'none');
+			setTimeout(function() {
+				$('#success-icon').css('display', 'flex');
+			}, 2000);
+			location.reload();
+            // alert(data.message);
+          })
+          .catch(error => {
+			$('#loader-container').css('display', 'none');
+			$('#success-icon').css('display', 'none');
+
+            console.error('Error updating profile:', error);
+          });
+      });
+    });
+  </script>
+</body>
 </html>

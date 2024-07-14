@@ -32,7 +32,19 @@ def about():
 
 @app.route("/view_profile")
 def view_profile():
-    return render_template("profile.html")
+    login_data = {
+        "username": session['username']
+    }
+    
+    success,resp = main.getUser(login_data)
+    if success != 1:
+        return redirect(url_for('error_page', message=resp))
+    else:
+        # username = session['username'] 
+        # return render_template("services.html", resp=resp,username=username)
+        return render_template("profile.html", user_data=resp)
+
+
 
 @app.route("/logout")
 def logout():
@@ -77,12 +89,13 @@ def login_form():
     password = request.form['password']
     # Do something with the username and password, like saving to a database
     print(f"Username: {username}, Password: {password}")
-    success,resp = main.Login(username,password)
+    success,resp,profile_image = main.Login(username,password)
     print(resp)
     if success != 1:
         return render_template('error_page.html', message=resp)
     else:
         session['username'] = resp
+        session['profile_image'] = profile_image
         text = "Bringing you the goods…"
         return render_template("welcome.html", text=text)
     
@@ -348,8 +361,9 @@ def update_profile():
         'username' : session['username']
 
     }
-    success,resp = main.update_profile(data)
-
+    success,resp,url = main.update_profile(data)
+    if success and resp:
+        session['profile_image'] = url
     # Return response
     return jsonify({
         'message': 'Updated profile submitted successfully'
@@ -414,6 +428,7 @@ def checkout():
     else:
         session['user_data'] = resp
         return render_template('checkout.html', order_data=data, user_data=resp,amount=amount)
+
 
 
 if __name__ == "__main__":
