@@ -1,0 +1,68 @@
+.box {
+    background-color: #fff; /* White background for the box */
+    padding: 10px;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px; /* Space between the boxes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+    width: 120px; /* Fixed width */
+    text-align: center; /* Center text inside the box */
+}
+
+.box:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.icon-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-text-container i {
+    margin-bottom: 8px;
+    color: #004d40; /* Change icon color to peacock green */
+}
+
+.icon-text-container span {
+    color: #004d40; /* Text color matching the peacock green background */
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #07766e;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a {
+    background-color: #004d40; /* Change to a light background color */
+    color: black; /* Ensure the text remains black */
+}
+
+.nav-item.active .dropdown-content {
+    display: block;
+    z-index: 100;
+}
+
+.profile-image {
+    width: 30px; /* Adjust the size as needed */
+    height: 30px;
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    margin-right: 8px; /* Space between image and text */
+}

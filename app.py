@@ -24,6 +24,7 @@ def shop():
         return render_template("shop.html", resp=resp,username=username)
 @app.route("/")
 def home():
+    session.clear()
     return render_template("login.html")
 
 @app.route("/about")
@@ -40,7 +41,7 @@ def view_profile():
     if success != 1:
         return redirect(url_for('error_page', message=resp))
     else:
-        # username = session['username'] 
+        # username = session['username']
         # return render_template("services.html", resp=resp,username=username)
         return render_template("profile.html", user_data=resp)
 
@@ -80,6 +81,7 @@ def login():
 
 @app.route("/signup")
 def signup():
+    session.clear()
     return render_template("signup.html")
 
 
